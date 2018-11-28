@@ -26,7 +26,7 @@ public class Worker {
     protected String _surname;
     protected float _salary;
     protected String _businessPhone;
-
+    protected int _id;
 
     public String GetWorkerPesel()
     {
@@ -62,6 +62,19 @@ public class Worker {
     {
         return _workerID;
     }
+
+    public String GetWorkerInfo()
+    {
+
+        return "";
+
+    }
+
+    public int GetDatabaseID()
+    {
+        return _id;
+    }
+
 
 
 }

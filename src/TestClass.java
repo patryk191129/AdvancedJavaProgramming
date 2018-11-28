@@ -1,6 +1,7 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TestClass {
@@ -70,7 +71,7 @@ public class TestClass {
                 commisionLimit = scanner.nextFloat();
 
 
-                WorkerTrader workerTrader = new WorkerTrader(pesel, name, surname, phoneNumber, salary, commision, commisionLimit);
+                WorkerTrader workerTrader = new WorkerTrader(0, pesel, name, surname, phoneNumber, salary, commision, commisionLimit);
                 workerDAO.AddWorker(workerTrader);
 
             }
@@ -87,7 +88,7 @@ public class TestClass {
                 System.out.print("Limit kosztów/miesiąc: ");
                 costLimit = scanner.nextFloat();
 
-                WorkerManager workerManager = new WorkerManager(pesel, name, surname, phoneNumber, salary, businessAllowance, costLimit, serviceCardNumber);
+                WorkerManager workerManager = new WorkerManager(0, pesel, name, surname, phoneNumber, salary, businessAllowance, costLimit, serviceCardNumber);
 
                 workerDAO.AddWorker(workerManager);
             }
@@ -106,13 +107,54 @@ public class TestClass {
 
     private static void ShowWorkerList()
     {
+        try {
+            List<Worker> workerList = workerDAO.GetWorkers();
 
+            Scanner scanner = new Scanner(System.in);
+
+            for(int i=0;i<((List) workerList).size();i++)
+            {
+                System.out.println(workerList.get(i).GetWorkerInfo());
+                scanner.nextLine();
+
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     private static void RemoveWorker()
     {
+        Scanner scanner = new Scanner(System.in);
 
+
+            System.out.print("Podaj identyfikator PESEL: ");
+            String pesel = scanner.nextLine();
+
+        try {
+            Worker worker = workerDAO.GetWorker(pesel);
+
+            if(worker != null)
+            {
+                System.out.println("Informacje o pracowniku");
+                System.out.print(worker.GetWorkerInfo());
+
+                workerDAO.DeleteWorker(pesel);
+
+            }
+            else
+            {
+                System.out.println("Pracownik nie istnieje");
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

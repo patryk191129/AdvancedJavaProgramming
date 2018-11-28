@@ -8,8 +8,9 @@ public class WorkerManager extends Worker {
     private String _serviceCardNumber;
 
 
-    public WorkerManager(String pesel, String name, String surname, String businessPhone, float salary, float businessAllowance, float costLimit, String serviceCardNumber)
+    public WorkerManager(int id,String pesel, String name, String surname, String businessPhone, float salary, float businessAllowance, float costLimit, String serviceCardNumber)
     {
+        this._id = id;
         this._pesel = pesel;
         this._workerID = Worker.WorkerID.valueOf("MANAGER");
         this._name = name;
@@ -35,5 +36,33 @@ public class WorkerManager extends Worker {
     {
         return _serviceCardNumber;
     }
+
+
+    public String GetWorkerInfo()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Identyfikator PESEL: ");
+        stringBuilder.append(this._pesel);
+        stringBuilder.append("\nImię: ");
+        stringBuilder.append(this._name);
+        stringBuilder.append("\nNazwisko: ");
+        stringBuilder.append(this._surname);
+        stringBuilder.append("\nStanowisko: Dyrektor");
+        stringBuilder.append("\nWynagrodzenie: ");
+        stringBuilder.append(this._salary);
+        stringBuilder.append("\nTelefon służbowy: ");
+        stringBuilder.append(this._businessPhone);
+        stringBuilder.append("\nDodatek służbowy: ");
+        stringBuilder.append(this._businessAllowance);
+        stringBuilder.append("\nKarta służbowa numer: ");
+        stringBuilder.append(this._serviceCardNumber);
+        stringBuilder.append("\nLimit kosztów/miesiąc: ");
+        stringBuilder.append(this._costLimit);
+        stringBuilder.append("\n");
+
+
+        return stringBuilder.toString();
+    }
+
 
 }

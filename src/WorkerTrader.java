@@ -8,8 +8,9 @@ public class WorkerTrader extends Worker {
 
 
 
-    public WorkerTrader(String pesel, String name, String surname, String businessPhone, float salary, float commision, float commsionLimit)
+    public WorkerTrader(int id,String pesel, String name, String surname, String businessPhone, float salary, float commision, float commsionLimit)
     {
+        this._id = id;
         this._pesel = pesel;
         this._workerID = Worker.WorkerID.valueOf("TRADER");
         this._name = name;
@@ -32,5 +33,28 @@ public class WorkerTrader extends Worker {
         return _commisionLimit;
     }
 
+    public String GetWorkerInfo()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Identyfikator PESEL: ");
+        stringBuilder.append(this._pesel);
+        stringBuilder.append("\nImię: ");
+        stringBuilder.append(this._name);
+        stringBuilder.append("\nNazwisko: ");
+        stringBuilder.append(this._surname);
+        stringBuilder.append("\nStanowisko: Handlowiec");
+        stringBuilder.append("\nWynagrodzenie: ");
+        stringBuilder.append(this._salary);
+        stringBuilder.append("\nTelefon służbowy: ");
+        stringBuilder.append(this._businessPhone);
+        stringBuilder.append("\nProwizja(%): ");
+        stringBuilder.append(this._commision);
+        stringBuilder.append("\nLimit prowizji/miesiac: ");
+        stringBuilder.append(this._commisionLimit);
+        stringBuilder.append("\n");
+
+
+        return stringBuilder.toString();
+    }
 
 }
