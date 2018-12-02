@@ -71,9 +71,7 @@ public class TestClass {
                 commisionLimit = scanner.nextFloat();
 
 
-                WorkerTrader workerTrader = new WorkerTrader(0, pesel, name, surname, phoneNumber, salary, commision, commisionLimit);
-                workerDAO.AddWorker(workerTrader);
-
+                workerDAO.AddWorker(new WorkerTrader(0, pesel, name, surname, phoneNumber, salary, commision, commisionLimit));
             }
 
             if(opt == 2)
@@ -88,9 +86,7 @@ public class TestClass {
                 System.out.print("Limit kosztów/miesiąc: ");
                 costLimit = scanner.nextFloat();
 
-                WorkerManager workerManager = new WorkerManager(0, pesel, name, surname, phoneNumber, salary, businessAllowance, costLimit, serviceCardNumber);
-
-                workerDAO.AddWorker(workerManager);
+                workerDAO.AddWorker(new WorkerManager(0, pesel, name, surname, phoneNumber, salary, businessAllowance, costLimit, serviceCardNumber));
             }
 
         }
@@ -143,7 +139,14 @@ public class TestClass {
                 System.out.println("Informacje o pracowniku");
                 System.out.print(worker.GetWorkerInfo());
 
-                workerDAO.DeleteWorker(pesel);
+                System.out.println("-----------------------------");
+                System.out.print("Czy chcesz usunąć pracownika? [T]ak/[N]ie");
+                String opt = scanner.next();
+
+                if(opt.equals("T"))
+                {
+                    workerDAO.DeleteWorker(pesel);
+                }
 
             }
             else
@@ -160,7 +163,30 @@ public class TestClass {
 
     private static void MakeBackup()
     {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("[Z]achowaj/[O]dtwórz: \t");
 
+        String opt = scanner.next();
+
+        if(opt.equals("Z"))
+        {
+            System.out.print("Nazwa pliku: \t");
+            String filename = scanner.next();
+            try {
+                workerDAO.ArchiveDatabaseToFile(filename);
+            }
+            catch(SQLException exception)
+            {
+
+            }
+        }
+
+        if(opt.equals("O"))
+        {
+            System.out.print("Nazwa pliku: \t");
+            String filename = scanner.next();
+
+        }
     }
 
 }

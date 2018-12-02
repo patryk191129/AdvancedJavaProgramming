@@ -1,8 +1,11 @@
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
 
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class WorkerDAO {
 
@@ -88,15 +91,15 @@ public class WorkerDAO {
         switch(workerType)
         {
             case 1:
-                query2 = "SELECT * FROM `worker`, `trader` where `worker`.`ID` = `trader`.`WorkerID` WHERE `pesel` = " + pesel +" ;";
+                query2 = "SELECT * FROM `worker`, `trader` where `worker`.`ID` = `trader`.`WorkerID` AND `pesel` = " + pesel +" ;";
                 break;
             case 2:
-                query2 = "SELECT * FROM `worker`, `manager` where `worker`.`ID` = `manager`.`WorkerID` WHERE `pesel` = " + pesel +" ;";
+                query2 = "SELECT * FROM `worker`, `manager` where `worker`.`ID` = `manager`.`WorkerID` AND `pesel` = " + pesel +" ;";
                 break;
             default: return null;
         }
 
-        ResultSet rs2 = st.executeQuery("SELECT * FROM `worker`, `manager` where `worker`.`ID` = `manager`.`WorkerID`;");
+        ResultSet rs2 = st.executeQuery(query2);
         rs2.next();
         return RetrieveInformationFromResultSet(rs2);
     }
@@ -207,6 +210,90 @@ public class WorkerDAO {
 
 
         return false;
+    }
+
+
+    public void ArchiveDatabaseToFile(String filename) throws SQLException
+    {
+        List<Worker> workerList = GetWorkers();
+
+        if(workerList.size() > 0) {
+            try {
+                FileOutputStream fos = new FileOutputStream(filename + ".zip");
+                ZipOutputStream zipOut = new ZipOutputStream(fos);
+
+                for(int i=0;i<workerList.size();i++) {
+
+                    Worker currWorker = workerList.get(i);
+
+
+                    File fileToZip = new File(currWorker._pesel + ".txt");
+                    fileToZip.createNewFile();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(currWorker._pesel+ ".txt"));
+
+                    switch(currWorker.GetWorkerID())
+                    {
+                        case 1:
+
+                            WorkerTrader trader = (WorkerTrader) currWorker;
+                            writer.write("1"); writer.newLine();
+                            writer.write(trader.GetWorkerName());writer.newLine();
+                            writer.write(trader.GetWorkerSurname());writer.newLine();
+                            writer.write(trader.GetWorkerBusinessPhone());writer.newLine();
+                            writer.write(Float.toString(trader.GetWorkerSalary()));writer.newLine();
+                            writer.write(Float.toString(trader.GetCommision()));writer.newLine();
+                            writer.write(Float.toString(trader.GetCommisionLimit()));writer.newLine();
+
+                            break;
+
+                        case 2:
+                            WorkerManager manager = (WorkerManager) currWorker;
+
+                            writer.write("2");writer.newLine();
+                            writer.write(manager.GetWorkerName());writer.newLine();
+                            writer.write(manager.GetWorkerSurname());writer.newLine();
+                            writer.write(manager.GetWorkerBusinessPhone());writer.newLine();
+                            writer.write(Float.toString(manager.GetWorkerSalary()));writer.newLine();
+                            writer.write(Float.toString(manager.GetWorkerBusinessAllowance()));writer.newLine();
+                            writer.write(Float.toString(manager.GetWorkerCostLimit()));writer.newLine();
+                            writer.write(manager.GetServiceCardNumber());writer.newLine();
+                            break;
+                    }
+
+                    writer.close();
+
+                    FileInputStream fis = new FileInputStream(fileToZip);
+
+                    ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+                    zipOut.putNextEntry(zipEntry);
+                    byte[] bytes = new byte[1024];
+                    int length;
+                    while ((length = fis.read(bytes)) >= 0) {
+                        zipOut.write(bytes, 0, length);
+                    }
+                    fis.close();
+                    fileToZip.delete();
+                }
+                zipOut.close();
+
+                fos.close();
+
+            } catch (IOException exception) {
+                System.out.println(exception);
+
+
+            }
+        }
+        else
+            System.out.println("Nothing to archive");
+
+
+
+    }
+
+    public void BackupDatabaseFromFile(String filename)
+    {
+
     }
 
 

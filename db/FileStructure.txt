@@ -1,0 +1,2 @@
+Trader,pesel,name,surname,phone_number,salary,commision,commisionLimit
+Worker,pesel,name,surname,phone_number,salary,businessAllowance,costLimit,serviceCardNumber
