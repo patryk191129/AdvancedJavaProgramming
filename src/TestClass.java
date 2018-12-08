@@ -1,5 +1,6 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -185,6 +186,19 @@ public class TestClass {
         {
             System.out.print("Nazwa pliku: \t");
             String filename = scanner.next();
+
+            try{
+                workerDAO.BackupDatabaseFromFile(filename);
+            }
+            catch(SQLException sqlException)
+            {
+
+            }
+            catch(IOException exception)
+            {
+                System.out.println("Błąd: niepoprawny plik");
+            }
+
 
         }
     }

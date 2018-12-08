@@ -3,8 +3,11 @@ import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 public class WorkerDAO {
@@ -105,6 +108,22 @@ public class WorkerDAO {
     }
 
 
+    private void ReplaceData(List<Worker> workers) throws SQLException {
+        Connection conn = Database.GetInstance().GetConnection();
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate("DELETE FROM `trader`;");
+        stmt.executeUpdate("DELETE FROM `manager`");
+        stmt.executeUpdate("DELETE FROM `worker`");
+        stmt.close();
+
+
+        for(int i=0;i<workers.size();i++)
+        {
+            AddWorker(workers.get(i));
+        }
+
+
+    }
 
     private Worker RetrieveInformationFromResultSet(ResultSet rs) throws SQLException {
         int workerType = rs.getInt("workerType");
@@ -227,9 +246,9 @@ public class WorkerDAO {
                     Worker currWorker = workerList.get(i);
 
 
-                    File fileToZip = new File(currWorker._pesel + ".txt");
+                    File fileToZip = new File(currWorker._pesel);
                     fileToZip.createNewFile();
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(currWorker._pesel+ ".txt"));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(currWorker._pesel));
 
                     switch(currWorker.GetWorkerID())
                     {
@@ -291,9 +310,62 @@ public class WorkerDAO {
 
     }
 
-    public void BackupDatabaseFromFile(String filename)
+    public void BackupDatabaseFromFile(String filename) throws SQLException, IOException
     {
+        List<Worker> workers = new ArrayList<>();
+        ZipFile zf = new ZipFile(filename);
 
+        Enumeration<? extends ZipEntry> entries = zf.entries();
+
+
+        while(entries.hasMoreElements())
+        {
+            ZipEntry entry = entries.nextElement();
+
+            InputStream inputStream = zf.getInputStream(entry);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String str;
+            List<String> vals = new ArrayList<>();
+
+            str = bufferedReader.readLine();
+            int groupID = Integer.parseInt(str);
+
+            while((str = bufferedReader.readLine()) != null)
+                vals.add(str);
+
+
+
+            switch(groupID)
+            {
+                case 1:
+                    workers.add(new WorkerTrader(1, entry.getName(), vals.get(0), vals.get(1), vals.get(2), Float.parseFloat(vals.get(3)), Float.parseFloat(vals.get(4)), Float.parseFloat(vals.get(5))));
+                    break;
+
+                case 2:
+                    workers.add(new WorkerManager(2, entry.getName(), vals.get(0), vals.get(1), vals.get(2), Float.parseFloat(vals.get(3)), Float.parseFloat(vals.get(4)), Float.parseFloat(vals.get(5)), vals.get(6)));
+                    break;
+
+            }
+
+
+
+
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+
+
+
+        }
+
+        try {
+            ReplaceData(workers);
+        }
+        catch(SQLException exception)
+        {
+            System.out.println(exception);
+        }
     }
 
 
