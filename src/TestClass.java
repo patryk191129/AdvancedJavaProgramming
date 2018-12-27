@@ -1,11 +1,14 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import java.io.Console;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import java.rmi.*;
+import java.net.*;
 
 public class TestClass {
 
@@ -66,9 +69,42 @@ public class TestClass {
 
             DataProtocol dp = new TCPClient();
 
+            String token = "";
+
+            try{
+
+                Console console = System.console();
+                String username = console.readLine("Nazwa uzytkownika: ");
+                char[] password = console.readPassword("Haslo: ");
+
+
+
+                Auth remote = (Auth) Naming.lookup("//localhost/Auth");
+                token = remote.Authenticate(username, new String(password));
+
+                if(token.equals("false"))
+                {
+                    System.out.println("Nieprawidlowy username/haslo");
+                    return;
+                }
+
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            } catch (NotBoundException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+
             System.out.println("============================");
             System.out.print("Ustanawianie polaczenia... ");
-            if(dp.StartConnection(address, portNumber))
+
+            if(!dp.StartConnection(address, portNumber, token))
+            {
+                System.out.println("Uwierzytelnianie zakonczone niepowodzeniem");
+                return;
+            }
 
 
             if(dp.GetAllData())

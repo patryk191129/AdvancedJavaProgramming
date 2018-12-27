@@ -3,6 +3,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,13 +29,31 @@ public class ThreadedEchoHandler implements Runnable {
 
             boolean done = false;
 
+
+
+
             while (!done && in.hasNextLine()) {
                 String line = in.nextLine();
 
                 if (line.trim().equals("GetData"))
                 {
+
+                    Auth remote = (Auth) Naming.lookup("//localhost/Auth");
+                    boolean isAuth = remote.CheckAuthentication(in.nextLine());
+
+
                     System.out.println("User requested get data");
-                    out.write("OK\n");
+
+                    if(isAuth)
+                        out.write("OK\n");
+                    else
+                    {
+                        out.write("False\n");
+                        out.flush();
+                        out.close();
+                        return;
+                    }
+
                     out.flush();
                     done = true;
                 }
@@ -55,7 +75,9 @@ public class ThreadedEchoHandler implements Runnable {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }  finally {
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } finally {
             try {
                 incoming.close();
             }catch(IOException ie)

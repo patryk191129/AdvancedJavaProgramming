@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.Socket;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,16 +13,20 @@ public class TCPClient implements DataProtocol {
 
         Socket socket;
         List<String> workerData;
+        String token;
 
-    public boolean StartConnection(String address, int port) {
+    public boolean StartConnection(String address, int port, String token) {
 
         try {
             socket = new Socket(address, port);
-
+            this.token = token;
             return socket != null;
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
 
         return false;
     }
@@ -30,7 +38,8 @@ public class TCPClient implements DataProtocol {
             workerData = new ArrayList<>();
             Scanner in = new Scanner(socket.getInputStream());
             PrintWriter writer = new PrintWriter(socket.getOutputStream());
-            writer.print("GetData");
+            writer.print("GetData\n");
+            writer.print(token +"\n");
             writer.flush();
             socket.shutdownOutput();
 
