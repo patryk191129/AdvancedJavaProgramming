@@ -9,6 +9,14 @@ public class Database {
     private static Database _instance = new Database();
     private Connection _connection;
 
+    private static String _dbName;
+
+
+    public static void SetDBname(String value)
+    {
+        _dbName = value;
+    }
+
 
     private Database()
     {
@@ -40,7 +48,7 @@ public class Database {
 
 
         try{
-            _connection = DriverManager.getConnection("jdbc:mysql://localhost/workers", "root", "");
+            _connection = DriverManager.getConnection("jdbc:mysql://localhost/"+_dbName, "root", "");
             System.out.print("Database is connected!");
 
         }

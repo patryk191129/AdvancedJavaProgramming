@@ -14,9 +14,14 @@ public class WorkerDAO {
 
 
 
-    public void AddWorker(Worker worker) throws SQLException {
+    public boolean AddWorker(Worker worker) throws SQLException {
 
         Connection conn = Database.GetInstance().GetConnection();
+
+        if(!IsPeselValidAndUnique(worker.GetWorkerPesel()))
+            return false;
+
+
 
         PreparedStatement p = conn.prepareStatement("INSERT INTO `worker` (`ID`, `PESEL`, `WorkerType`, `Name`, `Surname`, `BusinessPhone`, `Salary`) VALUES (NULL, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
         p.setString(1, worker.GetWorkerPesel());        //Pesel
@@ -66,7 +71,7 @@ public class WorkerDAO {
             p2.close();
 
         }
-
+        return true;
     }
 
     public Worker GetWorker(String pesel) throws SQLException {
@@ -187,6 +192,63 @@ public class WorkerDAO {
         return workers;
     }
 
+
+    public List<String> GetWorkersAsStringList()
+    {
+        try {
+            List<Worker> workerList = GetWorkers();
+            List<String> output = new ArrayList<>();
+
+
+            for(int i=0;i<workerList.size();i++) {
+
+                Worker currWorker = workerList.get(i);
+
+                StringBuilder sb = new StringBuilder();
+
+                switch(currWorker.GetWorkerID())
+                {
+                    case 1:
+
+                        WorkerTrader trader = (WorkerTrader) currWorker;
+                        sb.append("1,");
+                        sb.append(trader.GetWorkerPesel()+",");
+                        sb.append(trader.GetWorkerName() + ",");
+                        sb.append(trader.GetWorkerSurname() + ",");
+                        sb.append(trader.GetWorkerBusinessPhone() + ",");
+                        sb.append(Float.toString(trader.GetWorkerSalary()) + ",");
+                        sb.append(Float.toString(trader.GetCommision()) + ",");
+                        sb.append(Float.toString(trader.GetCommisionLimit()));
+
+                        break;
+
+                    case 2:
+                        WorkerManager manager = (WorkerManager) currWorker;
+
+                        sb.append("2,");
+                        sb.append(manager.GetWorkerPesel()+",");
+                        sb.append(manager.GetWorkerName()+ ",");
+                        sb.append(manager.GetWorkerSurname()+ ",");
+                        sb.append(manager.GetWorkerBusinessPhone()+ ",");
+                        sb.append(Float.toString(manager.GetWorkerSalary())+ ",");
+                        sb.append(Float.toString(manager.GetWorkerBusinessAllowance())+ ",");
+                        sb.append(Float.toString(manager.GetWorkerCostLimit())+ ",");
+                        sb.append(manager.GetServiceCardNumber());
+                        break;
+                }
+
+                output.add(sb.toString());
+            }
+
+            return output;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public void UpdateWorker(Worker worker)
     {
@@ -369,5 +431,67 @@ public class WorkerDAO {
     }
 
 
+    public boolean IsPeselValidAndUnique(String pesel) {
 
+        PeselValidator peselValidator = new PeselValidator(pesel);
+
+        if(peselValidator.isValid())
+            return true;
+
+        return false;
+
+    }
+
+    public void BackupDatabaseFromProtocol(List<String> returnData)
+    {
+
+        List<Worker> workers = new ArrayList<>();
+
+        for(int i=0;i<returnData.size();i++)
+        {
+            String []split = returnData.get(i).split(",");
+
+            if(split[0].equals("1"))
+            {
+            WorkerTrader trader = new WorkerTrader(1,
+                    split[1],
+                    split[2],
+                    split[3],
+                    split[4],
+                    Float.parseFloat(split[5]),
+                    Float.parseFloat(split[6]),
+                    Float.parseFloat(split[7])
+            );
+
+            workers.add(trader);
+
+            }
+            if(split[0].equals("2"))
+            {
+
+                WorkerManager manager = new WorkerManager(2,
+                        split[1],
+                        split[2],
+                        split[3],
+                        split[4],
+                        Float.parseFloat(split[5]),
+                        Float.parseFloat(split[6]),
+                        Float.parseFloat(split[7]),
+                        split[8]
+                        );
+
+            workers.add(manager);
+
+            }
+        }
+
+
+        try {
+            ReplaceData(workers);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

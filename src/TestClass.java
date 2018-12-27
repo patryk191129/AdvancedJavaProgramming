@@ -1,17 +1,32 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 public class TestClass {
 
-    static WorkerDAO workerDAO = new WorkerDAO();
+    public static WorkerDAO workerDAO = new WorkerDAO();
 
 
     public static void main(String[] args)
     {
+        Database.SetDBname(args[0]);
+
+
+        try {
+            Runnable r = new SocketListener(args[1]);
+            Thread t = new Thread(r);
+            t.start();
+        }
+        catch(IOException ie)
+        {
+            System.out.println("Nie mozna utworzyc socketu");
+        }
+
 
         int option = 0;
         Scanner scanner = new Scanner(System.in);
@@ -19,7 +34,7 @@ public class TestClass {
 
         do{
 
-            System.out.println("MENU\n1. Lista pracowników\n2. Dodaj pracownika\n3. Usuń pracownika\n4.Kopia zapasowa\n5. Wyjście z programu\nWybór >");
+            System.out.println("MENU\n1. Lista pracowników\n2. Dodaj pracownika\n3. Usuń pracownika\n4.Kopia zapasowa\n5. Pobierz dane z sieci.\n6. Wyjście z programu\nWybór >");
             option = scanner.nextInt();
 
             switch(option)
@@ -28,12 +43,62 @@ public class TestClass {
                 case 2: AddNewWorker(); break;
                 case 3: RemoveWorker(); break;
                 case 4: MakeBackup(); break;
+                case 5: DownloadData(); break;
             }
 
-        }while(option != 5);
+        }while(option < 6);
 
     }
 
+    private static void DownloadData()
+    {
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Adres:\t");
+            String address = scanner.nextLine();
+
+            System.out.print("Port:\t");
+            String port = scanner.nextLine();
+
+            int portNumber = Integer.parseInt(port);
+
+            DataProtocol dp = new TCPClient();
+
+            System.out.println("============================");
+            System.out.print("Ustanawianie polaczenia... ");
+            if(dp.StartConnection(address, portNumber))
+
+
+            if(dp.GetAllData())
+            {
+                System.out.print("Sukces");
+                System.out.println("============================\n");
+                System.out.println("Czy zapisac pobrane dane? [T]/[N]: ");
+                String opt = scanner.nextLine();
+
+                if(opt.equals("t") || opt.equals("T"))
+                {
+                    workerDAO.BackupDatabaseFromProtocol(dp.ReturnData());
+                }
+
+            }
+            else
+            {
+                System.out.println("Niepowodzenie - brak danych do pobrania");
+            }
+
+
+
+
+
+        }
+        catch(java.util.InputMismatchException e)
+        {
+            System.out.println("Niepoprawne dane wejsciowe");
+        }
+    }
 
 
     public static void AddNewWorker()
@@ -51,6 +116,8 @@ public class TestClass {
             scanner.nextLine();
             System.out.print("Identyfikator pesel: ");
             pesel = scanner.nextLine();
+
+
             System.out.print("Imię: ");
             name = scanner.nextLine();
             System.out.print("Nazwisko: ");
@@ -59,6 +126,9 @@ public class TestClass {
             phoneNumber = scanner.nextLine();
             System.out.print("Wynagrodzenie: ");
             salary = scanner.nextFloat();
+
+
+            boolean created = false;
 
 
             //Dla handlowca
@@ -72,7 +142,7 @@ public class TestClass {
                 commisionLimit = scanner.nextFloat();
 
 
-                workerDAO.AddWorker(new WorkerTrader(0, pesel, name, surname, phoneNumber, salary, commision, commisionLimit));
+                created = workerDAO.AddWorker(new WorkerTrader(0, pesel, name, surname, phoneNumber, salary, commision, commisionLimit));
             }
 
             if(opt == 2)
@@ -82,13 +152,20 @@ public class TestClass {
 
                 System.out.print("Dodatek służbowy: ");
                 businessAllowance = scanner.nextFloat();
+                scanner.nextLine();
                 System.out.print("Karta służbowa numer: ");
                 serviceCardNumber = scanner.nextLine();
                 System.out.print("Limit kosztów/miesiąc: ");
                 costLimit = scanner.nextFloat();
 
-                workerDAO.AddWorker(new WorkerManager(0, pesel, name, surname, phoneNumber, salary, businessAllowance, costLimit, serviceCardNumber));
+                created = workerDAO.AddWorker(new WorkerManager(0, pesel, name, surname, phoneNumber, salary, businessAllowance, costLimit, serviceCardNumber));
             }
+
+            if(!created)
+                System.out.println("Nie utworzono pracownika (niepoprawny numer pesel badz został już zajęty");
+            else
+                System.out.println("Poprawnie utworzono nowego pracownika");
+
 
         }
         catch(SQLException exception)
