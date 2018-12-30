@@ -13,6 +13,7 @@ public class SocketListener implements Runnable {
 
     public SocketListener(String port) throws IOException {
         _port = Integer.parseInt(port);
+        System.out.println("Started TCP listenere at: " + _port);
         s = new ServerSocket(_port);
     }
 

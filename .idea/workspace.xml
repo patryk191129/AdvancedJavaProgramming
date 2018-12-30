@@ -11,24 +11,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadedEchoHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="938">
-              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TestClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+            <state relative-caret-position="748">
+              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#DownloadData#0;class#TestClass#0" />
                 <element signature="method#AddNewWorker#0;class#TestClass#0" />
                 <element signature="method#ShowWorkerList#0;class#TestClass#0" />
@@ -39,82 +28,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Auth.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/WorkerManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Worker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/WorkerTrader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-330">
-              <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/WorkerDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="551" column="20" selection-start-line="551" selection-start-column="20" selection-end-line="551" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1035#1036#0" expanded="true" />
-                <element signature="e#1054#1055#0" expanded="true" />
-                <element signature="method#AddWorker#0;class#WorkerDAO#0" />
-                <element signature="method#GetWorker#0;class#WorkerDAO#0" />
-                <element signature="method#ReplaceData#0;class#WorkerDAO#0" />
-                <element signature="method#RetrieveInformationFromResultSet#0;class#WorkerDAO#0" />
-                <element signature="method#GetWorkers#0;class#WorkerDAO#0" />
-                <element signature="method#GetWorkersAsStringList#0;class#WorkerDAO#0" />
-                <element signature="method#DeleteWorker#0;class#WorkerDAO#0" />
-                <element signature="method#DeleteWorker#1;class#WorkerDAO#0" />
-                <element signature="method#ArchiveDatabaseToFile#0;class#WorkerDAO#0" />
-                <element signature="method#BackupDatabaseFromFile#0;class#WorkerDAO#0" />
-                <element signature="method#IsPeselValidAndUnique#0;class#WorkerDAO#0" />
-                <element signature="method#BackupDatabaseFromProtocol#0;class#WorkerDAO#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -123,6 +42,7 @@
     <findStrings>
       <find>.txt</find>
       <find>syste</find>
+      <find>serverk</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,29 +56,48 @@
         <option value="$PROJECT_DIR$/src/PeselValidator.java" />
         <option value="$PROJECT_DIR$/src/SocketSender.java" />
         <option value="$PROJECT_DIR$/src/Database.java" />
-        <option value="$PROJECT_DIR$/src/SocketListener.java" />
         <option value="$PROJECT_DIR$/src/DataProtocol.java" />
         <option value="$PROJECT_DIR$/src/TCPClient.java" />
         <option value="$PROJECT_DIR$/src/ThreadedEchoHandler.java" />
         <option value="$PROJECT_DIR$/src/WorkerManager.java" />
         <option value="$PROJECT_DIR$/src/WorkerTrader.java" />
         <option value="$PROJECT_DIR$/src/Worker.java" />
-        <option value="$PROJECT_DIR$/src/TestClass.java" />
         <option value="$PROJECT_DIR$/src/WorkerDAO.java" />
+        <option value="$PROJECT_DIR$/src/SOAPService.java" />
+        <option value="$PROJECT_DIR$/src/SoapServiceInterface.java" />
+        <option value="$PROJECT_DIR$/src/SoapServiceImpl.java" />
+        <option value="$PROJECT_DIR$/SOAP/src/TimePublisherMT.java" />
+        <option value="$PROJECT_DIR$/SOAP/src/ch01/ts/TimePublisherMT.java" />
+        <option value="$PROJECT_DIR$/SOAP/src/ch01/ts/TimeServer.java" />
+        <option value="$PROJECT_DIR$/SOAP/src/ch01/ts/TimeServerImpl.java" />
+        <option value="$PROJECT_DIR$/SOAP/src/ch01/ts/MyThreadPool.java" />
+        <option value="$PROJECT_DIR$/src/ts/TimeServerImpl.java" />
+        <option value="$PROJECT_DIR$/src/SocketListener.java" />
+        <option value="$PROJECT_DIR$/src/ts/TimePublisherMT.java" />
+        <option value="$PROJECT_DIR$/src/ts/SoapInterface.java" />
+        <option value="$PROJECT_DIR$/src/ts/TimeServer.java" />
+        <option value="$PROJECT_DIR$/src/SoapInterface.java" />
+        <option value="$PROJECT_DIR$/src/ts/SOAPInterface.java" />
+        <option value="$PROJECT_DIR$/src/ts/SOAPServerK.java" />
+        <option value="$PROJECT_DIR$/src/ts/SOAPService.java" />
+        <option value="$PROJECT_DIR$/src/ts/SOAPServerService.java" />
+        <option value="$PROJECT_DIR$/src/ts/SOAPServer.java" />
+        <option value="$PROJECT_DIR$/src/TestClass.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
-    <option name="width" value="3859" />
-    <option name="height" value="2129" />
+    <option name="width" value="3860" />
+    <option name="height" value="2130" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -175,7 +114,24 @@
             <path>
               <item name="AdvancedJavaProgramming" type="b2602c69:ProjectViewProjectNode" />
               <item name="AdvancedJavaProgramming" type="462c0819:PsiDirectoryNode" />
+              <item name="SOAP" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AdvancedJavaProgramming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AdvancedJavaProgramming" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AdvancedJavaProgramming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AdvancedJavaProgramming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AdvancedJavaProgramming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AdvancedJavaProgramming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AdvancedJavaProgramming" type="b2602c69:ProjectViewProjectNode" />
@@ -185,11 +141,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546190473886" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546202419816" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/SOAP/src" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../javaRMI" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -255,7 +211,7 @@
     <frame x="-7" y="-7" width="3086" height="1702" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27693325" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28288168" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -264,15 +220,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" weight="0.40764332" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867812" visible="true" weight="0.27070063" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8430271" visible="true" weight="0.29363057" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867812" weight="0.27070063" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32929936" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49966952" weight="0.32929936" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50132185" side_tool="true" visible="true" weight="0.27070063" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49933907" weight="0.32929936" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.1569729" side_tool="true" visible="true" weight="0.29363057" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3299363" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4990086" weight="0.32929936" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49603435" weight="0.32929936" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -423,16 +379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SocketListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Database.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
@@ -440,13 +386,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataProtocol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="73" selection-start-line="4" selection-start-column="73" selection-end-line="4" selection-end-column="73" />
         </state>
       </provider>
     </entry>
@@ -473,20 +412,68 @@
     <entry file="file://$PROJECT_DIR$/src/AuthenticationServer_Stub.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Worker.java">
+    <entry file="file://$PROJECT_DIR$/src/SOAPService.java" />
+    <entry file="file://$PROJECT_DIR$/src/Auth.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="176">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorkerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/WorkerManager.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar!/com/sun/xml/internal/ws/transport/http/server/EndpointImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="344">
+          <caret line="236" selection-start-line="236" selection-end-line="236" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar!/com/sun/xml/internal/ws/spi/ProviderImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/javax/xml/ws/Endpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="239" selection-start-line="239" selection-end-line="239" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoapServiceInterface.java" />
+    <entry file="file://$PROJECT_DIR$/src/SoapServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/ThreadedEchoHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1364">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SOAP/src/SoapService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -495,39 +482,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WorkerTrader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-330">
+        <state relative-caret-position="66">
           <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Auth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-          <folding>
-            <element signature="method#DownloadData#0;class#TestClass#0" />
-            <element signature="method#AddNewWorker#0;class#TestClass#0" />
-            <element signature="method#ShowWorkerList#0;class#TestClass#0" />
-            <element signature="method#RemoveWorker#0;class#TestClass#0" />
-            <element signature="method#MakeBackup#0;class#TestClass#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadedEchoHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="938">
-          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -536,12 +492,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WorkerDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="551" column="20" selection-start-line="551" selection-start-column="20" selection-end-line="551" selection-end-column="20" />
+        <state relative-caret-position="1017">
+          <caret line="537" column="23" selection-start-line="537" selection-start-column="23" selection-end-line="537" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1035#1036#0" expanded="true" />
-            <element signature="e#1054#1055#0" expanded="true" />
             <element signature="method#AddWorker#0;class#WorkerDAO#0" />
             <element signature="method#GetWorker#0;class#WorkerDAO#0" />
             <element signature="method#ReplaceData#0;class#WorkerDAO#0" />
@@ -554,6 +508,158 @@
             <element signature="method#BackupDatabaseFromFile#0;class#WorkerDAO#0" />
             <element signature="method#IsPeselValidAndUnique#0;class#WorkerDAO#0" />
             <element signature="method#BackupDatabaseFromProtocol#0;class#WorkerDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoapInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="73" selection-start-line="4" selection-start-column="73" selection-end-line="4" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SocketListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoapInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" selection-start-line="6" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/MyThreadPool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="60" column="32" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/GetWorkersResponse.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/GetWorkersResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/GetWorkers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/ObjectFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/ObjectFactory.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/package-info.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/package-info.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPServerService.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="e#464#465#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPServerOutput.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/SOAPServerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="e#1467#1468#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#DownloadData#0;class#TestClass#0" />
+            <element signature="method#AddNewWorker#0;class#TestClass#0" />
+            <element signature="method#ShowWorkerList#0;class#TestClass#0" />
+            <element signature="method#RemoveWorker#0;class#TestClass#0" />
+            <element signature="method#MakeBackup#0;class#TestClass#0" />
           </folding>
         </state>
       </provider>

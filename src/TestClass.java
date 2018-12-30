@@ -1,6 +1,10 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.xml.sax.SAXException;
+import ts.GetWorkersResponse;
 
+
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -8,6 +12,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.ws.Endpoint;
+import javax.xml.ws.WebServiceRef;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -22,8 +28,7 @@ public class TestClass {
     public static WorkerDAO workerDAO = new WorkerDAO();
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws MalformedURLException {
         Database.SetDBname(args[0]);
 
         try {
@@ -35,6 +40,26 @@ public class TestClass {
         {
             System.out.println("Nie mozna utworzyc socketu");
         }
+
+
+        int soapPort = Integer.parseInt(args[1])+1;
+
+        ts.SOAPService soapService = new ts.SOAPService(soapPort);
+
+
+
+        URL url = new URL("http://localhost:1112/src?wsdl");
+
+        client.SOAPServerService soapServerService = new client.SOAPServerService(url);
+        client.SOAPServer server = soapServerService.getSOAPServerPort();
+
+
+        if(server != null)
+        {
+            System.out.println(server.getWorkers("DD"));
+        }
+
+
 
 
         int option = 0;
