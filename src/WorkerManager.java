@@ -1,5 +1,12 @@
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.text.DecimalFormat;
 
+
+@XmlRootElement(name = "WorkerManager")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class WorkerManager extends Worker {
 
 
@@ -7,6 +14,11 @@ public class WorkerManager extends Worker {
     private float _costLimit;
     private String _serviceCardNumber;
 
+
+    public WorkerManager()
+    {
+
+    }
 
     public WorkerManager(int id,String pesel, String name, String surname, String businessPhone, float salary, float businessAllowance, float costLimit, String serviceCardNumber)
     {

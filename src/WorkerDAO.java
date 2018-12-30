@@ -1,5 +1,14 @@
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,9 +19,27 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+
+
+
+@XmlRootElement(name = "workers")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class WorkerDAO {
 
 
+    @XmlElement(name = "WorkerManager")
+    private List<WorkerManager> manager = new ArrayList<>();
+
+    @XmlElement(name = "WorkerTrader")
+    private List<WorkerTrader> trader = new ArrayList<>();
+
+
+    private WorkerDAO instance;
+
+    public void SetInstance(WorkerDAO instance)
+    {
+        this.instance = instance;
+    }
 
     public boolean AddWorker(Worker worker) throws SQLException {
 
@@ -494,4 +521,51 @@ public class WorkerDAO {
 
 
     }
+
+
+    public void SerializeToJAXB() throws JAXBException, SQLException, IOException {
+
+
+        List<Worker> workers = GetWorkers();
+        trader = new ArrayList<>();
+        manager = new ArrayList<>();
+
+        for(int i=0;i<workers.size();i++)
+        {
+            if(workers.get(i).GetWorkerID() == 1)
+                trader.add((WorkerTrader) (workers.get(i)));
+            if(workers.get(i).GetWorkerID() == 2)
+                manager.add((WorkerManager) (workers.get(i)));
+        }
+
+
+        OutputStream outputStream = new FileOutputStream("output.xml");
+        BufferedOutputStream dos = new BufferedOutputStream(outputStream);
+
+        JAXBContext context = JAXBContext.newInstance(WorkerDAO.class);
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+        StringWriter sw = new StringWriter();
+        m.marshal(TestClass.workerDAO, sw);
+        dos.write(sw.getBuffer().toString().getBytes());
+        dos.close();
+
+    }
+
+
+    public void DeserializeFromJAXB() throws SAXException, JAXBException {
+
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(new File("schema.xsd"));
+
+        JAXBContext jc = JAXBContext.newInstance(WorkerDAO.class);
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        unmarshaller.setSchema(schema);
+        TestClass.workerDAO = (WorkerDAO) unmarshaller.unmarshal(new File("output.xml"));
+
+
+    }
+
+
 }

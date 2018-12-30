@@ -1,0 +1,39 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="workers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="WorkerManager">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="_workerID"/>
+              <xs:element type="xs:long" name="_pesel"/>
+              <xs:element type="xs:string" name="_name"/>
+              <xs:element type="xs:string" name="_surname"/>
+              <xs:element type="xs:float" name="_salary"/>
+              <xs:element type="xs:string" name="_businessPhone"/>
+              <xs:element type="xs:short" name="_id"/>
+              <xs:element type="xs:float" name="_businessAllowance"/>
+              <xs:element type="xs:float" name="_costLimit"/>
+              <xs:element type="xs:string" name="_serviceCardNumber"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WorkerTrader" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="_workerID"/>
+              <xs:element type="xs:long" name="_pesel"/>
+              <xs:element type="xs:string" name="_name"/>
+              <xs:element type="xs:string" name="_surname"/>
+              <xs:element type="xs:float" name="_salary"/>
+              <xs:element type="xs:string" name="_businessPhone"/>
+              <xs:element type="xs:short" name="_id"/>
+              <xs:element type="xs:float" name="_commision"/>
+              <xs:element type="xs:float" name="_commisionLimit"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

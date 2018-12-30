@@ -1,11 +1,21 @@
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.text.DecimalFormat;
 
+
+@XmlRootElement(name = "WorkerTrader")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class WorkerTrader extends Worker {
 
     private float _commision;
     private float _commisionLimit;
 
 
+    public WorkerTrader()
+    {
+
+    }
 
 
     public WorkerTrader(int id,String pesel, String name, String surname, String businessPhone, float salary, float commision, float commsionLimit)

@@ -1,7 +1,14 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import org.xml.sax.SAXException;
 
-import java.io.Console;
-import java.io.IOException;
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -19,7 +26,6 @@ public class TestClass {
     {
         Database.SetDBname(args[0]);
 
-
         try {
             Runnable r = new SocketListener(args[1]);
             Thread t = new Thread(r);
@@ -34,6 +40,22 @@ public class TestClass {
         int option = 0;
         Scanner scanner = new Scanner(System.in);
         Database.GetInstance().Connect();
+
+        try {
+            workerDAO.SerializeToJAXB();
+            workerDAO.DeserializeFromJAXB();
+
+        }
+        catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
 
         do{
 
