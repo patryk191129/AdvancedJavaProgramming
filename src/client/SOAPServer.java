@@ -17,7 +17,7 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "SOAPServer", targetNamespace = "http://ts/")
+@WebService(name = "ts.SOAPServer", targetNamespace = "http://ts/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
@@ -34,7 +34,7 @@ public interface SOAPServer {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getWorkers", targetNamespace = "http://ts/", className = "client.GetWorkers")
     @ResponseWrapper(localName = "getWorkersResponse", targetNamespace = "http://ts/", className = "client.GetWorkersResponse")
-    @Action(input = "http://ts/SOAPServer/getWorkersRequest", output = "http://ts/SOAPServer/getWorkersResponse")
+    @Action(input = "http://ts/ts.SOAPServer/getWorkersRequest", output = "http://ts/ts.SOAPServer/getWorkersResponse")
     public String getWorkers(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);

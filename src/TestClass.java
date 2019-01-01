@@ -1,22 +1,24 @@
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import Auth.Auth;
+import ClientProtocols.DataProtocol;
+import ClientProtocols.SOAPClient;
+import ClientProtocols.TCPClient;
+import DAO.Worker;
+import DAO.WorkerDAO;
+import DAO.WorkerManager;
+import DAO.WorkerTrader;
+import Database.Database;
+import TCPIPServer.SocketListener;
 import org.xml.sax.SAXException;
-import ts.GetWorkersResponse;
 
-
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import javax.xml.ws.Endpoint;
-import javax.xml.ws.WebServiceRef;
 import java.io.*;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +34,7 @@ public class TestClass {
         Database.SetDBname(args[0]);
 
         try {
-            Runnable r = new SocketListener(args[1]);
+            Runnable r = new SocketListener(args[1], workerDAO);
             Thread t = new Thread(r);
             t.start();
         }
@@ -44,20 +46,7 @@ public class TestClass {
 
         int soapPort = Integer.parseInt(args[1])+1;
 
-        ts.SOAPService soapService = new ts.SOAPService(soapPort);
-
-
-
-        URL url = new URL("http://localhost:1112/src?wsdl");
-
-        client.SOAPServerService soapServerService = new client.SOAPServerService(url);
-        client.SOAPServer server = soapServerService.getSOAPServerPort();
-
-
-        if(server != null)
-        {
-            System.out.println(server.getWorkers("DD"));
-        }
+        ts.SOAPService soapService = new ts.SOAPService(soapPort, workerDAO);
 
 
 
@@ -65,21 +54,6 @@ public class TestClass {
         int option = 0;
         Scanner scanner = new Scanner(System.in);
         Database.GetInstance().Connect();
-
-        try {
-            workerDAO.SerializeToJAXB();
-            workerDAO.DeserializeFromJAXB();
-
-        }
-        catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
 
 
         do{
@@ -104,7 +78,38 @@ public class TestClass {
     {
 
         try {
+            boolean xml = false;
             Scanner scanner = new Scanner(System.in);
+
+            //Console console = System.console();
+            System.out.print("Podaj użytkownika: ");
+            String username = scanner.nextLine();
+            System.out.println("Podaj hasło: ");
+            String password = scanner.nextLine();
+
+
+            System.out.print("Protokół [T]cp/IP czy [S]OAP?: ");
+            String protocol = scanner.nextLine();
+
+
+            DataProtocol dp = null;
+
+            if(protocol.equals("T") || protocol.equals("t"))
+                dp = new TCPClient();
+
+            if(protocol.equals("S") || protocol.equals("s"))
+            {
+                dp = new SOAPClient();
+                xml = true;
+            }
+
+
+            if(dp == null)
+            {
+                System.out.println("Błąd - niepoprawna opcja;");
+                return;
+            }
+
 
             System.out.print("Adres:\t");
             String address = scanner.nextLine();
@@ -114,56 +119,59 @@ public class TestClass {
 
             int portNumber = Integer.parseInt(port);
 
-            DataProtocol dp = new TCPClient();
 
             String token = "";
 
             try{
 
-                Console console = System.console();
-                String username = console.readLine("Nazwa uzytkownika: ");
-                char[] password = console.readPassword("Haslo: ");
+
+                System.out.print("Autentykacja użytkownika...");
 
 
-
-                Auth remote = (Auth) Naming.lookup("//localhost/Auth");
-                token = remote.Authenticate(username, new String(password));
+                Registry rgsty = LocateRegistry.getRegistry(3333);
+                Auth remote = (Auth) rgsty.lookup("Auth");
+                token = remote.Authenticate(username, password);
 
                 if(token.equals("false"))
                 {
-                    System.out.println("Nieprawidlowy username/haslo");
+                    System.out.println("Niepowodzenie");
                     return;
                 }
+                else
+                    System.out.println("Sukces");
 
             } catch (RemoteException e) {
                 e.printStackTrace();
             } catch (NotBoundException e) {
                 e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             }
-
 
             System.out.println("============================");
             System.out.print("Ustanawianie polaczenia... ");
 
             if(!dp.StartConnection(address, portNumber, token))
             {
-                System.out.println("Uwierzytelnianie zakonczone niepowodzeniem");
+                System.out.println("Niepowodzenie");
                 return;
             }
+            else
+                System.out.println("Sukces");
 
+            System.out.print("Pobieranie... ");
 
             if(dp.GetAllData())
             {
-                System.out.print("Sukces");
+                System.out.println("Sukces");
                 System.out.println("============================\n");
                 System.out.println("Czy zapisac pobrane dane? [T]/[N]: ");
                 String opt = scanner.nextLine();
 
                 if(opt.equals("t") || opt.equals("T"))
                 {
-                    workerDAO.BackupDatabaseFromProtocol(dp.ReturnData());
+                    if(xml)
+                        DeserializeFromJaxb(dp.ReturnData());
+                    else
+                        workerDAO.BackupDatabaseFromProtocol(dp.ReturnData());
                 }
 
             }
@@ -180,6 +188,10 @@ public class TestClass {
         catch(java.util.InputMismatchException e)
         {
             System.out.println("Niepoprawne dane wejsciowe");
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
         }
     }
 
@@ -261,6 +273,12 @@ public class TestClass {
         }
     }
 
+
+
+    public void Test()
+    {
+        System.out.println("Test");
+    }
 
     private static void ShowWorkerList()
     {
@@ -360,6 +378,26 @@ public class TestClass {
             }
 
 
+        }
+    }
+
+
+    private static void DeserializeFromJaxb(List<String> dataList) throws SAXException, JAXBException {
+
+        String stream = dataList.get(0);
+
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(new File("schema.xsd"));
+
+        JAXBContext jc = JAXBContext.newInstance(WorkerDAO.class);
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        unmarshaller.setSchema(schema);
+        StringReader reader = new StringReader(stream);
+        workerDAO = (WorkerDAO) unmarshaller.unmarshal(reader);
+        try {
+            workerDAO.DeserializeToDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
