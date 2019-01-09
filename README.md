@@ -1,9 +1,6 @@
 # Zaawansowane techniki programowania JAVA
 ## Autor: Patryk Piotrowski
 
-
-### Struktura bazy danych
-
 #### Uruchamianie programu klienckiego
 <i>TestClass dbname 1111</i>
 
