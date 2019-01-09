@@ -43,8 +43,8 @@ public class AuthenticationServer extends UnicastRemoteObject implements Auth {
         env.put(Context.SECURITY_PRINCIPAL, username);
         env.put(Context.SECURITY_CREDENTIALS, password);
 
-        //Jezeli jest polaczenie z ZUTEM xD
-        /*
+        //Jezeli jest polaczenie z ZUTEM
+
         DirContext ctx;
 
         try {
@@ -63,7 +63,7 @@ public class AuthenticationServer extends UnicastRemoteObject implements Auth {
             System.out.println("Invalid authorization");
             return "false";
         }
-        */
+
 
 
         RemoveExistingToken(username);
@@ -108,6 +108,13 @@ public class AuthenticationServer extends UnicastRemoteObject implements Auth {
         for(int i=0;i<tokens.size();i++)
             if(tokens.get(i).token.equals(token))
             {
+                if(tokens.get(i).expirationTime <= System.currentTimeMillis())
+                {
+                    System.out.println("Token expired: " + token);
+                    tokens.remove(i);
+                    return false;
+                }
+
                 System.out.println("Used token to authenticate: " + token);
                 tokens.remove(i);
                 return true;

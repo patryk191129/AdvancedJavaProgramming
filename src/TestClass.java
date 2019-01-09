@@ -81,12 +81,13 @@ public class TestClass {
             boolean xml = false;
             Scanner scanner = new Scanner(System.in);
 
-            //Console console = System.console();
+            Console console = System.console();
             System.out.print("Podaj użytkownika: ");
             String username = scanner.nextLine();
-            System.out.println("Podaj hasło: ");
-            String password = scanner.nextLine();
+            //System.out.println("Podaj hasło: ");
+            char[] pass = console.readPassword("Podaj haslo: ");
 
+            String password = String.valueOf(pass);
 
             System.out.print("Protokół [T]cp/IP czy [S]OAP?: ");
             String protocol = scanner.nextLine();
